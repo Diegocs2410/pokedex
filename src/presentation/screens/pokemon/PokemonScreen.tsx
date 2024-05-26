@@ -86,6 +86,63 @@ const PokemonScreen = ({navigation, route}: Props) => {
       />
 
       <View style={{height: 100}} />
+
+      <Text style={styles.subTitle}>Abilitites</Text>
+      <FlatList
+        data={pokemon.abilities}
+        horizontal
+        keyExtractor={item => item}
+        showsHorizontalScrollIndicator={false}
+        renderItem={({item}) => (
+          <Chip mode="outlined" selectedColor="white" style={{marginLeft: 10}}>
+            {Formatter.capitalize(item)}
+          </Chip>
+        )}
+      />
+
+      {/* Stats */}
+      <Text style={styles.subTitle}>Stats</Text>
+      <FlatList
+        data={pokemon.stats}
+        horizontal
+        keyExtractor={item => item.name}
+        showsHorizontalScrollIndicator={false}
+        renderItem={({item}) => (
+          <View style={styles.statsContainer}>
+            <Text style={{color: 'white', flex: 1}}>
+              {Formatter.capitalize(item.name)} - Level: {item.level}
+            </Text>
+          </View>
+        )}
+      />
+
+      {/* Moves */}
+      <Text style={styles.subTitle}>Moves</Text>
+      <FlatList
+        data={pokemon.moves}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        centerContent
+        renderItem={({item}) => (
+          <View style={styles.statsContainer}>
+            <Text style={{color: 'white', flex: 1}}>
+              {Formatter.capitalize(item.name)} - Level: {item.level}
+            </Text>
+          </View>
+        )}
+      />
+      {/* Games */}
+      <Text style={styles.subTitle}>Games</Text>
+      <FlatList
+        data={pokemon.games}
+        horizontal
+        keyExtractor={item => item}
+        showsHorizontalScrollIndicator={false}
+        centerContent
+        renderItem={({item}) => (
+          <Chip selectedColor="white">{Formatter.capitalize(item)}</Chip>
+        )}
+      />
     </ScrollView>
   );
 };
