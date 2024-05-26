@@ -26,7 +26,7 @@ const HomeScreen = () => {
           keyExtractor={(pokemon, index) => `${pokemon.id}-${index}`}
           numColumns={2}
           style={{
-            marginTop: top + 20,
+            paddingTop: top + 20,
           }}
           renderItem={({item: pokemon}) => <PokemonCard pokemon={pokemon} />}
           ListHeaderComponent={() => (

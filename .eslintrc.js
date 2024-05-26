@@ -1,6 +1,6 @@
 module.exports = {
   root: true,
-  extends: '@react-native',
+  extends: ['@react-native', 'plugin:react/jsx-runtime'],
   rules: {
     'prettier/prettier': [
       'error',
