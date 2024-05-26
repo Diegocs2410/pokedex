@@ -1,29 +1,38 @@
-import {Image, StyleSheet, View} from 'react-native';
+import {Image, Pressable, StyleSheet, View} from 'react-native';
 import {Card, Text} from 'react-native-paper';
 import type {Pokemon} from '../../../../domain/entities/pokemon';
 import {FadeInImage} from '../ui/FadeInImage';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {RootStackParamList} from '../../navigator/StackNavigator';
 
 interface Props {
   pokemon: Pokemon;
 }
 
 const PokemonCard = ({pokemon}: Props) => {
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   return (
-    <Card style={[styles.cardContainer, {backgroundColor: pokemon.color}]}>
-      <Text style={styles.name} variant="bodyLarge" lineBreakMode="middle">
-        {pokemon.name}
-        {'\n#' + pokemon.id}
-      </Text>
-      {/* PokeBall background image */}
-      <View style={styles.pokeballContainer}>
-        <Image
-          style={styles.pokeball}
-          source={require('../../../../assets/pokeball-light.png')}
-        />
-      </View>
-      <FadeInImage uri={pokemon.avatar} style={styles.pokemonImage} />
-      <Text style={[styles.name, {marginTop: 20}]}>{pokemon.types[0]}</Text>
-    </Card>
+    <Pressable
+      style={{flex: 1}}
+      onPress={() =>
+        navigation.navigate('PokemonScreen', {pokemonId: pokemon.id})
+      }>
+      <Card style={[styles.cardContainer, {backgroundColor: pokemon.color}]}>
+        <Text style={styles.name} variant="bodyLarge" lineBreakMode="middle">
+          {pokemon.name}
+          {'\n#' + pokemon.id}
+        </Text>
+        {/* PokeBall background image */}
+        <View style={styles.pokeballContainer}>
+          <Image
+            style={styles.pokeball}
+            source={require('../../../../assets/pokeball-light.png')}
+          />
+        </View>
+        <FadeInImage uri={pokemon.avatar} style={styles.pokemonImage} />
+        <Text style={[styles.name, {marginTop: 20}]}>{pokemon.types[0]}</Text>
+      </Card>
+    </Pressable>
   );
 };
 const styles = StyleSheet.create({
